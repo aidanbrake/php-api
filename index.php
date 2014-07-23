@@ -1,94 +1,223 @@
 <?php
-require_once('MysqliDb.php');
+require_once('lib/MysqliDb.php');
 error_reporting(E_ALL);
-$action = 'adddb';
+$action = '';
+$username = '';
+$key = '';
+$user = null;
 $data = array();
 
-function printUsers () {
-    global $db;
+/*
 
-    $users = $db->get ("users");
-    if ($db->count == 0) {
-        echo "<td align=center colspan=4>No users found</td>";
-        return;
+
+Video Details
+-title: (tvshows->Title)
+-date: (tvshows->RecordDate)
+-start time: tvshows->FirstStart
+-end time: tvshows->StopTime
+-duration: tvshows->Duration 
+-direct path: “(wowzaclient->WowzaIP)/(tvshows->RecordDate)/(tvshows->Title).mp4”
+-thumbnail path: “admin.mangomolo.com/analytics/Recorder/(userid)/(tvshows->RecordDate)/(tvshows->Title).mp4.jpg
+-youtube link: (tvshows->YoutubeLink) if 0 the video is not uploaded
+
+*/
+
+/**
+ * Returns the Full List of Tags for this client
+ */
+    function get_tags_list() {
+        global $db;
+        global $user;
+
+        $result = array();
+        $records = $db -> rawQuery("SELECT distinct tags FROM tvshows where userID=54");// Should be modified...
+
+        foreach ($records as $record) {
+            if ($record['tags'] == "")
+                continue;
+
+            array_push($result, $record['tags']);
+        }
+
+        echo json_encode($result);
     }
-    foreach ($users as $u) {
-        echo "<tr>
-            <td>{$u['id']}</td>
-            <td>{$u['login']}</td>
-            <td>{$u['firstName']} {$u['lastName']}</td>
-            <td>
-                <a href='index.php?action=rm&id={$u['id']}'>rm</a> ::
-                <a href='index.php?action=mod&id={$u['id']}'>ed</a>
-            </td>
-        </tr>";
+
+/**
+ * Returns the list of all VOD Videos with all their details
+ * @param null
+ */
+    function get_vod_list() {
+        global $db;
+
+        $tags = $_GET['tags'];
+        $result = array();
+        if (empty($tags))
+            $records = $db -> get("tvshows");
+        else
+            $records = $db -> rawQuery("select * from tvshows where `tags`like'".$tags."'");
+
+        foreach ($records as $record) {
+            $item['title'] = $record['Title'];
+            $item['date'] = $record['RecordDate'];
+            $item['start_time'] = $record['FirstStart'];
+            $item['end_time'] = $record['StopTime'];
+            $item['duration'] = $record['Duration'];
+            // $item['direct_path'] = $record['Title'];
+            $item['thumbnail_path'] = "admin.mangomolo.com/analytics/Recorder/".$user['id']."/".$record['RecordDate']."/".$record['Title']."mp4.jpg";
+            if (empty($record['YoutubeLink']))
+                $item['youtube_link'] = 0;
+            else
+                $item['youtube_link'] = $record['YoutubeLink'];
+
+            array_push($result, $item);
+        }
+
+        echo json_encode($result);
     }
-}
 
-function action_adddb () {
+
+/**
+ * Returns the list of all VOD Videos for a specific Date (Can be single date or Range)
+ * @param date or date range
+ */
+function get_vod_by_date($date) {
     global $db;
 
-    $data = Array(
-        'login' => $_POST['login'],
-        'customerId' => 1,
-        'firstName' => $_POST['firstName'],
-        'lastName' => $_POST['lastName'],
-        'password' => $db->func('SHA1(?)',Array ($_POST['password'] . 'salt123')),
-        'createdAt' => $db->now(),
-        'expires' => $db->now('+1Y')
-    );
-    $id = $db->insert ('users', $data);
-    header ("Location: index.php");
-    exit;
+    $date = $_GET['date'];
+    $result = array();
+    if (empty($tags))
+        get_vod_list();
+    else
+        $records = $db -> rawQuery("select * from tvshows where `tags`like'".$tags."'");
+
+    foreach ($records as $record) {
+        $item['title'] = $record['Title'];
+        $item['date'] = $record['RecordDate'];
+        $item['start_time'] = $record['FirstStart'];
+        $item['end_time'] = $record['StopTime'];
+        $item['duration'] = $record['Duration'];
+        // $item['direct_path'] = $record['Title'];
+        $item['thumbnail_path'] = "admin.mangomolo.com/analytics/Recorder/".$user['id']."/".$record['RecordDate']."/".$record['Title']."mp4.jpg";
+        if (empty($record['YoutubeLink']))
+            $item['youtube_link'] = 0;
+        else
+            $item['youtube_link'] = $record['YoutubeLink'];
+
+        array_push($result, $item);
+    }
+
+    echo json_encode($result);
 }
 
-function action_moddb () {
-    global $db;
 
-    $data = Array(
-        'login' => $_POST['login'],
-        'customerId' => 1,
-        'firstName' => $_POST['firstName'],
-        'lastName' => $_POST['lastName'],
-    );
-    $id = (int)$_POST['id'];
-    $db->where ("customerId",1);
-    $db->where ("id", $id);
-    $db->update ('users', $data);
-    header ("Location: index.php");
-    exit;
-
+/**
+ * Returns the list of all VOD Videos for a specific tag
+ */ 
+function get_vod_by_tag() {
+    echo "";
 }
-function action_rm () {
-    global $db;
-    $id = (int)$_GET['id'];
-    $db->where ("customerId",1);
-    $db->where ("id", $id);
-    $db->delete ('users');
-    header ("Location: index.php");
-    exit;
 
+/**
+ * Returns the list of all VOD Videos for a specific date and start time
+ */ 
+function get_vod_by_date_starttime() {
+    echo "";
 }
-function action_mod () {
-    global $db;
-    global $data;
-    global $action;
 
-    $action = 'moddb';
-    $id = (int)$_GET['id'];
-    $db->where ("id", $id);
-    $data = $db->getOne ("users");
+
+/**
+ * Returns the list of all VOD Videos for a specific time interval
+ */ 
+function get_vod_by_timeinterval() {
+    echo "";
+}
+ 
+
+/**
+ * Returns the top (x) viewed VODs where ‘x’ is a parameter you decide
+ */ 
+function Get_topviewed() {
+    echo "";
+}
+ 
+/**
+ * Returns the top (x) viewed VODs by date where ‘x’ is a parameter you decide
+ */
+function Get_topviewed_bydate() {
+    echo "";
+}
+ 
+
+/**
+ * Returns the top (x) viewed VODs by date and time interval where ‘x’ is a parameter you decide
+ */
+function Get_topviewed_bydate_time() {
+    echo "";
+}
+ 
+
+/**
+ * Returns the top viewed (x) VODs of all time
+ */
+function Get_topviewed_alltime() {
+    echo "";
+}
+
+
+/**
+ * upload video to mangomolo
+ */
+function post_video() {
+    echo "";
+}
+
+/**
+ * Authentication
+ */
+function isAuthenticated($username="", $key="") {
+    global $db;
+    global $user;
+
+
+    $query = "select * from users where `username`='".$username."' and `key`='".$key."';";
+    $result = $db->rawQuery($query);
+    if ($result)
+    {
+        $user = $result[0];
+        return true;
+    }
+    else
+    {
+        $user = null;
+        return false;
+    }
 }
 
 $db = new Mysqlidb ('localhost', 'root', 'root', 'testdb');
 if ($_GET) {
-    $f = "action_".$_GET['action'];
+    $action = $_GET['action'];
+    $username = $_GET['username'];
+    $key = $_GET['key'];
+
+    if (!isAuthenticated($username, $key))
+    {
+        echo "Authentication failure";
+        exit;
+    }
+
+    $f = $_GET['action'];
     if (function_exists ($f)) {
         $f();
     }
 }
 
 ?>
+
+<?
+if (empty($action))
+{
+?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -103,23 +232,25 @@ if ($_GET) {
 <table width='50%'>
     <tr bgcolor='#cccccc'>
         <th>ID</th>
-        <th>Login</th>
-        <th>Name</th>
-        <th>Action</th>
+        <th>Username</th>
+        <th>Key</th>
     </tr>
     <?php printUsers();?>
 
 </table>
 <hr width=50%>
 <form action='index.php?action=<?php echo $action?>' method=post>
-    <input type=hidden name='id' value='<?php echo $data['id']?>'>
+    <!-- <input type=hidden name='id' value='<?php echo $data['id']?>'>
     <input type=text name='login' required placeholder='Login' value='<?php echo $data['login']?>'>
     <input type=text name='firstName' required placeholder='First Name' value='<?php echo $data['firstName']?>'>
     <input type=text name='lastName' required placeholder='Last Name' value='<?php echo $data['lastName']?>'>
     <input type=password name='password' placeholder='Password'>
-    <input type=submit value='New User'></td>
+    <input type=submit value='New User'></td> -->
 <form>
 </table>
 </center>
 </body>
 </html>
+<?
+}
+?>

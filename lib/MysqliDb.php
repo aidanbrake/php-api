@@ -133,6 +133,11 @@ class MysqliDb
         if ($this->isSubQuery)
             return;
 
+        // echo $this->host."<br/>";
+        // echo $this->username."<br/>";
+        // echo $this->password."<br/>";
+        // echo $this->port;
+
         $this->_mysqli = new mysqli ($this->host, $this->username, $this->password, $this->db, $this->port)
             or die('There was a problem connecting to the database');
 
