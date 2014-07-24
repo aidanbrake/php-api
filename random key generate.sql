@@ -1,0 +1,2 @@
+CREATE TRIGGER set_api_key BEFORE INSERT ON users 
+FOR EACH ROW SET new.apikey = SUBSTRING(md5(new.id) FROM 1 FOR 24);
