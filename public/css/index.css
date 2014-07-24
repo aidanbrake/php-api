@@ -84,4 +84,9 @@ a {
                     padding-left: 40px;}
                 #document section.api-block div.example > div > ol > li.tab3 {
                     padding-left: 50px;}
+        #document section.api-block div.example > textarea {
+            min-width: 600px;
+            resize: vertical;
+            margin-left: 50px;
+            min-height: 200px;}
 

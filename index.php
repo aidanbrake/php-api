@@ -28,7 +28,7 @@ $header = "Document";
             array_push($result, $record['tags']);
         }
 
-        echo json_encode($result);
+        echo str_replace('\/', '/', json_encode($result));
     }
 
 /**
@@ -61,6 +61,10 @@ $header = "Document";
 
         foreach ($records as $record) {
             $item['title'] = $record['Title'];
+            $item['ar_title'] = $record['ArTitle'];
+            $item['ar_description'] = $record['ArDescription'];
+            $item['en_title'] = $record['EnTitle'];
+            $item['en_description'] = $record['EnDescription'];
             $item['date'] = $record['RecordDate'];
             $item['start_time'] = $record['FirstStart'];
             $item['end_time'] = $record['StopTime'];
@@ -76,7 +80,7 @@ $header = "Document";
         }
 
         // return $result;
-        echo json_encode($result);
+        echo str_replace('\/', '/', json_encode($result));
     }
 
 
@@ -101,6 +105,10 @@ function get_vod_by_date() {
 
     foreach ($records as $record) {
         $item['title'] = $record['Title'];
+        $item['ar_title'] = $record['ArTitle'];
+        $item['ar_description'] = $record['ArDescription'];
+        $item['en_title'] = $record['EnTitle'];
+        $item['en_description'] = $record['EnDescription'];
         $item['date'] = $record['RecordDate'];
         $item['start_time'] = $record['FirstStart'];
         $item['end_time'] = $record['StopTime'];
@@ -115,7 +123,7 @@ function get_vod_by_date() {
         array_push($result, $item);
     }
 
-    echo json_encode($result);
+    echo str_replace('\/', '/', json_encode($result));
 }
 
 
@@ -149,6 +157,10 @@ function get_vod_by_date_starttime() {
 
     foreach ($records as $record) {
         $item['title'] = $record['Title'];
+        $item['ar_title'] = $record['ArTitle'];
+        $item['ar_description'] = $record['ArDescription'];
+        $item['en_title'] = $record['EnTitle'];
+        $item['en_description'] = $record['EnDescription'];
         $item['date'] = $record['RecordDate'];
         $item['start_time'] = $record['FirstStart'];
         $item['end_time'] = $record['StopTime'];
@@ -163,7 +175,7 @@ function get_vod_by_date_starttime() {
         array_push($result, $item);
     }
 
-    echo json_encode($result);
+    echo str_replace('\/', '/', json_encode($result));
 }
 
 
@@ -184,6 +196,10 @@ function get_vod_by_timeinterval() {
 
     foreach ($records as $record) {
         $item['title'] = $record['Title'];
+        $item['ar_title'] = $record['ArTitle'];
+        $item['ar_description'] = $record['ArDescription'];
+        $item['en_title'] = $record['EnTitle'];
+        $item['en_description'] = $record['EnDescription'];
         $item['date'] = $record['RecordDate'];
         $item['start_time'] = $record['FirstStart'];
         $item['end_time'] = $record['StopTime'];
@@ -198,7 +214,7 @@ function get_vod_by_timeinterval() {
         array_push($result, $item);
     }
 
-    echo json_encode($result);
+    echo str_replace('\/', '/', json_encode($result));
 }
  
 
@@ -210,6 +226,22 @@ function Get_topviewed() {
     global $user;
     global $wowza;
 
+//     $wowzaViews = $wowza[WowzaViews]
+
+//     -total views = YoutubeViews+WowzaViews
+// -Wowza Views = (tvshows->WowzaViews)
+// -Youtube Views = $Link = explode("?",(tvshows->YoutubeViews));
+//         $Link = $Link[1];
+//         $Link = explode("&",$Link);
+//         $Link = $Link[0];
+//         $Link = explode("=",$Link);
+//         $Link = $Link[1];
+//         $video_ID = $Link;
+//         $JSON = file_get_contents("https://gdata.youtube.com/feeds/api/videos/{$video_ID}?v=2&alt=json");
+//         $JSON_Data = json_decode($JSON);
+//         $views = $JSON_Data->{'entry'}->{'yt$statistics'}->{'viewCount'};
+
+
     // $tags = $_GET['tags'];
     
     $result = array();
@@ -220,6 +252,10 @@ function Get_topviewed() {
 
     foreach ($records as $record) {
         $item['title'] = $record['Title'];
+        $item['ar_title'] = $record['ArTitle'];
+        $item['ar_description'] = $record['ArDescription'];
+        $item['en_title'] = $record['EnTitle'];
+        $item['en_description'] = $record['EnDescription'];
         $item['date'] = $record['RecordDate'];
         $item['start_time'] = $record['FirstStart'];
         $item['end_time'] = $record['StopTime'];
@@ -234,7 +270,7 @@ function Get_topviewed() {
         array_push($result, $item);
     }
 
-    echo json_encode($result);
+    echo str_replace('\/', '/', json_encode($result));
 }
  
 /**
@@ -257,6 +293,10 @@ function Get_topviewed_bydate() {
 
     foreach ($records as $record) {
         $item['title'] = $record['Title'];
+        $item['ar_title'] = $record['ArTitle'];
+        $item['ar_description'] = $record['ArDescription'];
+        $item['en_title'] = $record['EnTitle'];
+        $item['en_description'] = $record['EnDescription'];
         $item['date'] = $record['RecordDate'];
         $item['start_time'] = $record['FirstStart'];
         $item['end_time'] = $record['StopTime'];
@@ -271,7 +311,7 @@ function Get_topviewed_bydate() {
         array_push($result, $item);
     }
 
-    echo json_encode($result);
+    echo str_replace('\/', '/', json_encode($result));
 }
  
 
@@ -297,6 +337,10 @@ function Get_topviewed_bydate_time() {
 
     foreach ($records as $record) {
         $item['title'] = $record['Title'];
+        $item['ar_title'] = $record['ArTitle'];
+        $item['ar_description'] = $record['ArDescription'];
+        $item['en_title'] = $record['EnTitle'];
+        $item['en_description'] = $record['EnDescription'];
         $item['date'] = $record['RecordDate'];
         $item['start_time'] = $record['FirstStart'];
         $item['end_time'] = $record['StopTime'];
@@ -311,7 +355,7 @@ function Get_topviewed_bydate_time() {
         array_push($result, $item);
     }
 
-    echo json_encode($result);
+    echo str_replace('\/', '/', json_encode($result));
 }
  
 
@@ -336,6 +380,10 @@ function Get_topviewed_alltime() {
 
     foreach ($records as $record) {
         $item['title'] = $record['Title'];
+        $item['ar_title'] = $record['ArTitle'];
+        $item['ar_description'] = $record['ArDescription'];
+        $item['en_title'] = $record['EnTitle'];
+        $item['en_description'] = $record['EnDescription'];
         $item['date'] = $record['RecordDate'];
         $item['start_time'] = $record['FirstStart'];
         $item['end_time'] = $record['StopTime'];
@@ -350,7 +398,7 @@ function Get_topviewed_alltime() {
         array_push($result, $item);
     }
 
-    echo json_encode($result);
+    echo str_replace('\/', '/', json_encode($result));
 }
 
 
@@ -364,7 +412,7 @@ function post_video() {
 /**
  * Authentication
  */
-function isAuthenticated() {
+function isAuthenticated($key) {
     global $db;
     global $user;
     global $wowza;
@@ -398,6 +446,7 @@ $db = new Mysqlidb ($hostname, $db_username, $password, $dbname);
 
 
 if ($_GET) {
+    global $wowza;
     $action = $_GET['action'];
     $key = $_GET['key'];
 
@@ -412,7 +461,6 @@ if ($_GET) {
         $f();
     }
 }
-
 ?>
 
 
@@ -446,10 +494,10 @@ if (empty($action)) {
                 <li><a href="#get_vod_by_tag">get_vod_by_tag</a></li>
                 <li><a href="#get_vod_by_date_starttime">get_vod_by_date_starttime</a></li>
                 <li><a href="#get_vod_by_timeinterval">get_vod_by_timeinterval</a></li>
-                <li><a href="#Get_topviewed">get_topviewed</a></li>
-                <li><a href="#Get_topviewed_bydate">get_topviewed_bydate</a></li>
-                <li><a href="#Get_topviewed_bydate_time">get_topviewed_bydate_time</a></li>
-                <li><a href="#Get_topviewed_alltime">get_topviewed_alltime</a></li>
+                <li><a href="#get_topviewed">get_topviewed</a></li>
+                <li><a href="#get_topviewed_bydate">get_topviewed_bydate</a></li>
+                <li><a href="#get_topviewed_bydate_time">get_topviewed_bydate_time</a></li>
+                <li><a href="#get_topviewed_alltime">get_topviewed_alltime</a></li>
                 <li><a href="#post_video">post_video</a></li>
             </ul>
         </div>
@@ -498,6 +546,18 @@ if (empty($action)) {
                             <li class="tab0">]</li>
                         </ol>
                     </div>
+                    <p>Code example</p>
+                    <textarea spellcheck="false" class="code">
+var apiHostName = "http://admin.mangomolo.com/",
+    apiPath = "api/index.php",
+    apiKey = "<your api key>";
+    action = "get_tags_list",
+    url = apiHostName + apiPath;
+
+$.get(url, {action:action, key: apiKey}, function(response) {
+    console.log(response);
+});
+                    </textarea>
                 </div>
             </section>
 
@@ -521,6 +581,10 @@ if (empty($action)) {
                             <li class="tab0">[</li>
                             <li class="tab1">{</li>
                             <li class="tab2">"title":"news",</li>
+                            <li class="tab2">"ar_title":"news",</li>
+                            <li class="tab2">"ar_description":"--------",</li>
+                            <li class="tab2">"en_title":"news",</li>
+                            <li class="tab2">"en_description":"---------",</li>
                             <li class="tab2">"date":"2014-06-26",</li>
                             <li class="tab2">"start_time":"14:17:21",</li>
                             <li class="tab2">"end_time":"14:18:19",</li>
@@ -531,6 +595,10 @@ if (empty($action)) {
                             <li class="tab1">},</li>
                             <li class="tab1">{</li>
                             <li class="tab2">"title":"news",</li>
+                            <li class="tab2">"ar_title":"news",</li>
+                            <li class="tab2">"ar_description":"--------",</li>
+                            <li class="tab2">"en_title":"news",</li>
+                            <li class="tab2">"en_description":"---------",</li>
                             <li class="tab2">"date":"2014-06-26",</li>
                             <li class="tab2">"start_time":"14:17:21",</li>
                             <li class="tab2">"end_time":"14:18:19",</li>
@@ -543,6 +611,15 @@ if (empty($action)) {
                             <li class="tab0">]</li>
                         </ol>
                     </div>
+
+                    <p>Code example</p>
+                    <textarea spellcheck="false" class="code">
+$hostname = "http://admin.mangomolo.com/"
+$apiPath = "api/index.php?key=<your_api_key>&action=get_vod_list";
+$url = $hostname + $apiPath;
+$json_string = file_get_contents($url);
+$json_data = json_decode($json_string);
+                    </textarea>
                 </div>
             </section>
 
@@ -567,6 +644,10 @@ if (empty($action)) {
                             <li class="tab0">[</li>
                             <li class="tab1">{</li>
                             <li class="tab2">"title":"news",</li>
+                            <li class="tab2">"ar_title":"news",</li>
+                            <li class="tab2">"ar_description":"--------",</li>
+                            <li class="tab2">"en_title":"news",</li>
+                            <li class="tab2">"en_description":"---------",</li>
                             <li class="tab2">"date":"2014-06-26",</li>
                             <li class="tab2">"start_time":"14:17:21",</li>
                             <li class="tab2">"end_time":"14:18:19",</li>
@@ -599,6 +680,38 @@ if (empty($action)) {
                             <li class="tab0">]</li>
                         </ol>
                     </div>
+
+                    <p>Code example1</p>
+                    <textarea spellcheck="false" class="code">
+var apiHostName = "http://admin.mangomolo.com/",
+    apiPath = "api/index.php",
+    url = apiHostName + apiPath;
+
+$.get(url, {
+            action:"get_vod_by_date",
+            key: <your_api_key>,
+            date1: '2014-06-30'
+        }, function(response) {
+    console.log(response);
+});
+                    </textarea>
+                    <br />
+
+                    <p>Code example2</p>
+                    <textarea spellcheck="false" class="code">
+var apiHostName = "http://admin.mangomolo.com/",
+    apiPath = "api/index.php",
+    url = apiHostName + apiPath;
+
+$.get(url, {
+            action:"get_vod_by_date",
+            key: <your_api_key>,
+            date1: '2014-06-30',
+            date2: '2014-07-01'
+        }, function(response) {
+    console.log(response);
+});
+                    </textarea>
                 </div>
             </section>
 
@@ -622,6 +735,10 @@ if (empty($action)) {
                             <li class="tab0">[</li>
                             <li class="tab1">{</li>
                             <li class="tab2">"title":"news",</li>
+                            <li class="tab2">"ar_title":"news",</li>
+                            <li class="tab2">"ar_description":"--------",</li>
+                            <li class="tab2">"en_title":"news",</li>
+                            <li class="tab2">"en_description":"---------",</li>
                             <li class="tab2">"date":"2014-06-26",</li>
                             <li class="tab2">"start_time":"14:17:21",</li>
                             <li class="tab2">"end_time":"14:18:19",</li>
@@ -632,6 +749,10 @@ if (empty($action)) {
                             <li class="tab1">},</li>
                             <li class="tab1">{</li>
                             <li class="tab2">"title":"test1",</li>
+                            <li class="tab2">"ar_title":"news",</li>
+                            <li class="tab2">"ar_description":"--------",</li>
+                            <li class="tab2">"en_title":"news",</li>
+                            <li class="tab2">"en_description":"---------",</li>
                             <li class="tab2">"date":"2014-06-29",</li>
                             <li class="tab2">"start_time":"14:17:21",</li>
                             <li class="tab2">"end_time":"14:18:19",</li>
@@ -643,6 +764,10 @@ if (empty($action)) {
                             <li class="tab1">...</li>
                             <li class="tab1">{</li>
                             <li class="tab2">"title":"sdfsddfsd",</li>
+                            <li class="tab2">"ar_title":"news",</li>
+                            <li class="tab2">"ar_description":"--------",</li>
+                            <li class="tab2">"en_title":"news",</li>
+                            <li class="tab2">"en_description":"---------",</li>
                             <li class="tab2">"date":"2014-06-30",</li>
                             <li class="tab2">"start_time":"14:17:21",</li>
                             <li class="tab2">"end_time":"14:18:19",</li>
@@ -654,6 +779,21 @@ if (empty($action)) {
                             <li class="tab0">]</li>
                         </ol>
                     </div>
+
+                    <p>Code example</p>
+                    <textarea spellcheck="false" class="code">
+var apiHostName = "http://admin.mangomolo.com/",
+    apiPath = "api/index.php",
+    url = apiHostName + apiPath;
+
+$.get(url, {
+            action:"get_vod_by_tag",
+            key: <your_api_key>,
+            tags: 'news'
+        }, function(response) {
+    console.log(response);
+});
+                    </textarea>
                 </div>
             </section>
 
@@ -672,7 +812,10 @@ if (empty($action)) {
                     <p>Example</p>
                     <div class="input">
                         Input:
-                        <p>actin: get_vod_by_date_starttime</p>
+                        <p>actin:      get_vod_by_date_starttime</p>
+                        <p>date1:      2014-06-26</p>
+                        <p>date2:      2014-07-01</p>
+                        <p>start_time: 17:04:24</p>
                     </div>
                     <div class="output">
                         Output:
@@ -680,6 +823,10 @@ if (empty($action)) {
                             <li class="tab0">[</li>
                             <li class="tab1">{</li>
                             <li class="tab2">"title":"news",</li>
+                            <li class="tab2">"ar_title":"news",</li>
+                            <li class="tab2">"ar_description":"--------",</li>
+                            <li class="tab2">"en_title":"news",</li>
+                            <li class="tab2">"en_description":"---------",</li>
                             <li class="tab2">"date":"2014-06-26",</li>
                             <li class="tab2">"start_time":"14:17:21",</li>
                             <li class="tab2">"end_time":"14:18:19",</li>
@@ -690,6 +837,10 @@ if (empty($action)) {
                             <li class="tab1">},</li>
                             <li class="tab1">{</li>
                             <li class="tab2">"title":"test1",</li>
+                            <li class="tab2">"ar_title":"news",</li>
+                            <li class="tab2">"ar_description":"--------",</li>
+                            <li class="tab2">"en_title":"news",</li>
+                            <li class="tab2">"en_description":"---------",</li>
                             <li class="tab2">"date":"2014-06-29",</li>
                             <li class="tab2">"start_time":"14:17:21",</li>
                             <li class="tab2">"end_time":"14:18:19",</li>
@@ -701,6 +852,10 @@ if (empty($action)) {
                             <li class="tab1">...</li>
                             <li class="tab1">{</li>
                             <li class="tab2">"title":"sdfsddfsd",</li>
+                            <li class="tab2">"ar_title":"news",</li>
+                            <li class="tab2">"ar_description":"--------",</li>
+                            <li class="tab2">"en_title":"news",</li>
+                            <li class="tab2">"en_description":"---------",</li>
                             <li class="tab2">"date":"2014-06-30",</li>
                             <li class="tab2">"start_time":"14:17:21",</li>
                             <li class="tab2">"end_time":"14:18:19",</li>
@@ -712,6 +867,24 @@ if (empty($action)) {
                             <li class="tab0">]</li>
                         </ol>
                     </div>
+
+                    <p>Code example</p>
+                    <textarea spellcheck="false" class="code">
+var apiHostName = "http://admin.mangomolo.com/",
+    apiPath = "api/index.php",
+    url = apiHostName + apiPath;
+
+$.get(url, {
+            action:"get_vod_by_date_starttime",
+            key: <your_api_key>,
+            date1: '2014-06-26',
+            date2: '2014-07-01'// or null,
+            start_time: '17:04:24'
+        }, function(response) {
+    console.log(response);
+});
+                    </textarea>
+
                 </div>
             </section>
 
@@ -737,6 +910,10 @@ if (empty($action)) {
                             <li class="tab0">[</li>
                             <li class="tab1">{</li>
                             <li class="tab2">"title":"news",</li>
+                            <li class="tab2">"ar_title":"news",</li>
+                            <li class="tab2">"ar_description":"--------",</li>
+                            <li class="tab2">"en_title":"news",</li>
+                            <li class="tab2">"en_description":"---------",</li>
                             <li class="tab2">"date":"2014-06-26",</li>
                             <li class="tab2">"start_time":"14:17:21",</li>
                             <li class="tab2">"end_time":"14:18:19",</li>
@@ -747,6 +924,10 @@ if (empty($action)) {
                             <li class="tab1">},</li>
                             <li class="tab1">{</li>
                             <li class="tab2">"title":"test1",</li>
+                            <li class="tab2">"ar_title":"news",</li>
+                            <li class="tab2">"ar_description":"--------",</li>
+                            <li class="tab2">"en_title":"news",</li>
+                            <li class="tab2">"en_description":"---------",</li>
                             <li class="tab2">"date":"2014-06-29",</li>
                             <li class="tab2">"start_time":"14:17:21",</li>
                             <li class="tab2">"end_time":"14:18:19",</li>
@@ -758,6 +939,10 @@ if (empty($action)) {
                             <li class="tab1">...</li>
                             <li class="tab1">{</li>
                             <li class="tab2">"title":"sdfsddfsd",</li>
+                            <li class="tab2">"ar_title":"news",</li>
+                            <li class="tab2">"ar_description":"--------",</li>
+                            <li class="tab2">"en_title":"news",</li>
+                            <li class="tab2">"en_description":"---------",</li>
                             <li class="tab2">"date":"2014-06-30",</li>
                             <li class="tab2">"start_time":"14:17:21",</li>
                             <li class="tab2">"end_time":"14:18:19",</li>
@@ -769,11 +954,26 @@ if (empty($action)) {
                             <li class="tab0">]</li>
                         </ol>
                     </div>
+
+                    <p>Code example</p>
+                    <textarea spellcheck="false" class="code">
+var apiHostName = "http://admin.mangomolo.com/",
+    apiPath = "api/index.php",
+    url = apiHostName + apiPath;
+
+$.get(url, {
+            action:"get_vod_by_timeinterval",
+            key: <your_api_key>,
+            interval: 10
+        }, function(response) {
+    console.log(response);
+});
+                    </textarea>
                 </div>
             </section>
 
             <section class="api-block" id="Get_topviewed">
-                <p class='title'>Get_topviewed</p>
+                <p class='title'>get_topviewed</p>
                 <p class="summary">Returns the top (x) viewed VODs where ‘x’ is a parameter you decide</p>
                 <div class="parameter-block">
                     <p>Parameters</p>
@@ -785,7 +985,7 @@ if (empty($action)) {
                     <p>Example</p>
                     <div class="input">
                         Input:
-                        <p>action:    Get_topviewed</p>
+                        <p>action:    get_topviewed</p>
                     </div>
                     <div class="output">
                         Output:
@@ -793,6 +993,10 @@ if (empty($action)) {
                             <li class="tab0">[</li>
                             <li class="tab1">{</li>
                             <li class="tab2">"title":"news",</li>
+                            <li class="tab2">"ar_title":"news",</li>
+                            <li class="tab2">"ar_description":"--------",</li>
+                            <li class="tab2">"en_title":"news",</li>
+                            <li class="tab2">"en_description":"---------",</li>
                             <li class="tab2">"date":"2014-06-26",</li>
                             <li class="tab2">"start_time":"14:17:21",</li>
                             <li class="tab2">"end_time":"14:18:19",</li>
@@ -803,6 +1007,10 @@ if (empty($action)) {
                             <li class="tab1">},</li>
                             <li class="tab1">{</li>
                             <li class="tab2">"title":"test1",</li>
+                            <li class="tab2">"ar_title":"news",</li>
+                            <li class="tab2">"ar_description":"--------",</li>
+                            <li class="tab2">"en_title":"news",</li>
+                            <li class="tab2">"en_description":"---------",</li>
                             <li class="tab2">"date":"2014-06-29",</li>
                             <li class="tab2">"start_time":"14:17:21",</li>
                             <li class="tab2">"end_time":"14:18:19",</li>
@@ -814,6 +1022,10 @@ if (empty($action)) {
                             <li class="tab1">...</li>
                             <li class="tab1">{</li>
                             <li class="tab2">"title":"sdfsddfsd",</li>
+                            <li class="tab2">"ar_title":"news",</li>
+                            <li class="tab2">"ar_description":"--------",</li>
+                            <li class="tab2">"en_title":"news",</li>
+                            <li class="tab2">"en_description":"---------",</li>
                             <li class="tab2">"date":"2014-06-30",</li>
                             <li class="tab2">"start_time":"14:17:21",</li>
                             <li class="tab2">"end_time":"14:18:19",</li>
@@ -825,23 +1037,35 @@ if (empty($action)) {
                             <li class="tab0">]</li>
                         </ol>
                     </div>
+
+                    <p>Code example</p>
+                    <textarea spellcheck="false" class="code">
+var apiHostName = "http://admin.mangomolo.com/",
+    apiPath = "api/index.php",
+    url = apiHostName + apiPath;
+
+$.get(url, {
+            action:"Get_topviewed",
+            key: <your_api_key>,
+        }, function(response) {
+    console.log(response);
+});
+                    </textarea>
                 </div>
             </section>
 
             <section class="api-block" id="Get_topviewed_bydate">
-                <p class='title'>Get_topviewed_bydate</p>
+                <p class='title'>get_topviewed_bydate</p>
                 <p class="summary">Returns the top (x) viewed VODs by date where ‘x’ is a parameter you decide</p>
                 <div class="parameter-block">
                     <p>Parameters</p>
-                    <p>
-                        <p>date:    string</p>
-                    </p>
+                    <p>date:    string</p>
                 </div>
                 <div class="example">
                     <p>Example</p>
                     <div class="input">
                         Input:
-                        <p>action:    Get_topviewed_bydate</p>
+                        <p>action:    get_topviewed_bydate</p>
                     </div>
                     <div class="output">
                         Output:
@@ -850,23 +1074,37 @@ if (empty($action)) {
                             <li class="tab0">]</li>
                         </ol>
                     </div>
+
+                    <p>Code example</p>
+                    <textarea spellcheck="false" class="code">
+var apiHostName = "http://admin.mangomolo.com/",
+    apiPath = "api/index.php",
+    url = apiHostName + apiPath;
+
+$.get(url, {
+            action:"get_topviewed_bydate",
+            key: <your_api_key>,
+        }, function(response) {
+    console.log(response);
+});
+                    </textarea>
                 </div>
             </section>
 
-            <section class="api-block" id="Get_topviewed_bydate_time">
-                <p class='title'>Get_topviewed_bydate_time</p>
+            <section class="api-block" id="get_topviewed_bydate_time">
+                <p class='title'>get_topviewed_bydate_time</p>
                 <p class="summary">Returns the top (x) viewed VODs by date and time interval where ‘x’ is a parameter you decide</p>
                 <div class="parameter-block">
                     <p>Parameters</p>
                     <p>
-                        
+                        None
                     </p>
                 </div>
                 <div class="example">
                     <p>Example</p>
                     <div class="input">
                         Input:
-                        <p>action:    Get_topviewed_bydate_time</p>
+                        <p>action:    get_topviewed_bydate_time</p>
                     </div>
                     <div class="output">
                         Output:
@@ -875,11 +1113,25 @@ if (empty($action)) {
                             <li class="tab0">]</li>
                         </ol>
                     </div>
+
+                    <p>Code example</p>
+                    <textarea spellcheck="false" class="code">
+var apiHostName = "http://admin.mangomolo.com/",
+    apiPath = "api/index.php",
+    url = apiHostName + apiPath;
+
+$.get(url, {
+            action:"get_topviewed_bydate_time",
+            key: <your_api_key>,
+        }, function(response) {
+    console.log(response);
+});
+                    </textarea>
                 </div>
             </section>
 
-            <section class="api-block" id="Get_topviewed_alltime">
-                <p class='title'>Get_topviewed_alltime</p>
+            <section class="api-block" id="get_topviewed_alltime">
+                <p class='title'>get_topviewed_alltime</p>
                 <p class="summary">Returns the top viewed (x) VODs of all time </p>
                 <div class="parameter-block">
                     <p>Parameters</p>
@@ -891,7 +1143,7 @@ if (empty($action)) {
                     <p>Example</p>
                     <div class="input">
                         Input:
-                        <p>action:    Get_topviewed_alltime</p>
+                        <p>action:    get_topviewed_alltime</p>
                     </div>
                     <div class="output">
                         Output:
@@ -900,6 +1152,20 @@ if (empty($action)) {
                             <li class="tab0">]</li>
                         </ol>
                     </div>
+
+                    <p>Code example</p>
+                    <textarea spellcheck="false" class="code">
+var apiHostName = "http://admin.mangomolo.com/",
+    apiPath = "api/index.php",
+    url = apiHostName + apiPath;
+
+$.get(url, {
+            action:"get_topviewed_alltime",
+            key: <your_api_key>,
+        }, function(response) {
+    console.log(response);
+});
+                    </textarea>
                 </div>
             </section>
 
@@ -925,6 +1191,20 @@ if (empty($action)) {
                             <li class="tab0">]</li>
                         </ol>
                     </div>
+
+                    <p>Code example</p>
+                    <textarea spellcheck="false" class="code">
+var apiHostName = "http://admin.mangomolo.com/",
+    apiPath = "api/index.php",
+    url = apiHostName + apiPath;
+
+$.get(url, {
+            action:"post_video",
+            key: <your_api_key>,
+        }, function(response) {
+    console.log(response);
+});
+                    </textarea>
                 </div>
             </section>
 
