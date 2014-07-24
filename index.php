@@ -478,7 +478,18 @@ if (empty($action)) {
 <html lang="en">
 <head>
     <title>API Document</title>
-    <link href="/public/css/index.css" rel="stylesheet" />
+    <?php 
+    if ($env == 'development') {
+    ?>
+        <link href="/public/css/index.css" rel="stylesheet" />
+    <?php
+    } else {
+    ?>
+        <link href="/api/public/css/index.css" rel="stylesheet" />
+    <?php
+    }
+    ?>
+    
 </head>
 <body>
     <div id="content">
@@ -1054,7 +1065,7 @@ $.get(url, {
                 </div>
             </section>
 
-            <section class="api-block" id="Get_topviewed_bydate">
+            <section class="api-block" id="get_topviewed_bydate">
                 <p class='title'>get_topviewed_bydate</p>
                 <p class="summary">Returns the top (x) viewed VODs by date where ‘x’ is a parameter you decide</p>
                 <div class="parameter-block">
