@@ -4,7 +4,7 @@
  *
  * @category  Database Access
  * @package   MysqliDb
- * @author    Aidan Brake <aidanbrake@gmail.com>
+ * @author    mangomolo <hello@mangomolo.com>
  * @version   1.0
  **/
 class MysqliDb
