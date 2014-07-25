@@ -70,7 +70,7 @@ $header = "Document";
             $item['end_time'] = $record['StopTime'];
             $item['duration'] = $record['Duration'];
             $item['direct_path'] = $wowza['WowzaIP']."/".$record['RecordDate']."/".$record['Title'].".mp4";
-            $item['thumbnail_path'] = "admin.mangomolo.com/analytics/Recorder/".$user['id']."/".$record['RecordDate']."/".$record['Title']."mp4.jpg";
+            $item['thumbnail_path'] = "admin.mangomolo.com/analytics/Recorder/".$user['id']."/".$record['RecordDate']."/".$record['Title'].".mp4.jpg";
             if (empty($record['YoutubeLink']))
                 $item['youtube_link'] = 0;
             else
@@ -91,6 +91,7 @@ $header = "Document";
 function get_vod_by_date() {
     global $db;
     global $user;
+    global $wowza;
 
     $date1 = $_GET['date1'];
     $date2 = $_GET['date2'];
@@ -114,7 +115,7 @@ function get_vod_by_date() {
         $item['end_time'] = $record['StopTime'];
         $item['duration'] = $record['Duration'];
         $item['direct_path'] = $wowza['WowzaIP']."/".$record['RecordDate']."/".$record['Title'].".mp4";
-        $item['thumbnail_path'] = "admin.mangomolo.com/analytics/Recorder/".$user['id']."/".$record['RecordDate']."/".$record['Title']."mp4.jpg";
+        $item['thumbnail_path'] = "admin.mangomolo.com/analytics/Recorder/".$user['id']."/".$record['RecordDate']."/".$record['Title'].".mp4.jpg";
         if (empty($record['YoutubeLink']))
             $item['youtube_link'] = 0;
         else
@@ -141,7 +142,8 @@ function get_vod_by_tag() {
  */ 
 function get_vod_by_date_starttime() {
     global $db;
-    global $user;
+    global $user;    
+    global $wowza;
 
     $date1 = $_GET['date1'];
     $date2 = $_GET['date2'];
@@ -166,7 +168,7 @@ function get_vod_by_date_starttime() {
         $item['end_time'] = $record['StopTime'];
         $item['duration'] = $record['Duration'];
         $item['direct_path'] = $wowza['WowzaIP']."/".$record['RecordDate']."/".$record['Title'].".mp4";
-        $item['thumbnail_path'] = "admin.mangomolo.com/analytics/Recorder/".$user['id']."/".$record['RecordDate']."/".$record['Title']."mp4.jpg";
+        $item['thumbnail_path'] = "admin.mangomolo.com/analytics/Recorder/".$user['id']."/".$record['RecordDate']."/".$record['Title'].".mp4.jpg";
         if (empty($record['YoutubeLink']))
             $item['youtube_link'] = 0;
         else
@@ -185,6 +187,7 @@ function get_vod_by_date_starttime() {
 function get_vod_by_timeinterval() {
     global $db;
     global $user;
+    global $wowza;
 
     $interval = $_GET['interval'];
     $result = array();
@@ -205,7 +208,7 @@ function get_vod_by_timeinterval() {
         $item['end_time'] = $record['StopTime'];
         $item['duration'] = $record['Duration'];
         $item['direct_path'] = $wowza['WowzaIP']."/".$record['RecordDate']."/".$record['Title'].".mp4";
-        $item['thumbnail_path'] = "admin.mangomolo.com/analytics/Recorder/".$user['id']."/".$record['RecordDate']."/".$record['Title']."mp4.jpg";
+        $item['thumbnail_path'] = "admin.mangomolo.com/analytics/Recorder/".$user['id']."/".$record['RecordDate']."/".$record['Title'].".mp4.jpg";
         if (empty($record['YoutubeLink']))
             $item['youtube_link'] = 0;
         else
@@ -226,20 +229,20 @@ function Get_topviewed() {
     global $user;
     global $wowza;
 
-//     $wowzaViews = $wowza[WowzaViews]
+    //     $wowzaViews = $wowza[WowzaViews]
 
-//     -total views = YoutubeViews+WowzaViews
-// -Wowza Views = (tvshows->WowzaViews)
-// -Youtube Views = $Link = explode("?",(tvshows->YoutubeViews));
-//         $Link = $Link[1];
-//         $Link = explode("&",$Link);
-//         $Link = $Link[0];
-//         $Link = explode("=",$Link);
-//         $Link = $Link[1];
-//         $video_ID = $Link;
-//         $JSON = file_get_contents("https://gdata.youtube.com/feeds/api/videos/{$video_ID}?v=2&alt=json");
-//         $JSON_Data = json_decode($JSON);
-//         $views = $JSON_Data->{'entry'}->{'yt$statistics'}->{'viewCount'};
+    //     -total views = YoutubeViews+WowzaViews
+    // -Wowza Views = (tvshows->WowzaViews)
+    // -Youtube Views = $Link = explode("?",(tvshows->YoutubeViews));
+    //         $Link = $Link[1];
+    //         $Link = explode("&",$Link);
+    //         $Link = $Link[0];
+    //         $Link = explode("=",$Link);
+    //         $Link = $Link[1];
+    //         $video_ID = $Link;
+    //         $JSON = file_get_contents("https://gdata.youtube.com/feeds/api/videos/{$video_ID}?v=2&alt=json");
+    //         $JSON_Data = json_decode($JSON);
+    //         $views = $JSON_Data->{'entry'}->{'yt$statistics'}->{'viewCount'};
 
 
     // $tags = $_GET['tags'];
@@ -261,7 +264,7 @@ function Get_topviewed() {
         $item['end_time'] = $record['StopTime'];
         $item['duration'] = $record['Duration'];
         $item['direct_path'] = $wowza['WowzaIP']."/".$record['RecordDate']."/".$record['Title'].".mp4";
-        $item['thumbnail_path'] = "admin.mangomolo.com/analytics/Recorder/".$user['id']."/".$record['RecordDate']."/".$record['Title']."mp4.jpg";
+        $item['thumbnail_path'] = "admin.mangomolo.com/analytics/Recorder/".$user['id']."/".$record['RecordDate']."/".$record['Title'].".mp4.jpg";
         if (empty($record['YoutubeLink']))
             $item['youtube_link'] = 0;
         else
@@ -279,6 +282,7 @@ function Get_topviewed() {
 function Get_topviewed_bydate() {
     global $db;
     global $user;
+    global $wowza;
 
     $date1 = $_GET['date1'];
     $date2 = $_GET['date2'];
@@ -302,7 +306,7 @@ function Get_topviewed_bydate() {
         $item['end_time'] = $record['StopTime'];
         $item['duration'] = $record['Duration'];
         $item['direct_path'] = $wowza['WowzaIP']."/".$record['RecordDate']."/".$record['Title'].".mp4";
-        $item['thumbnail_path'] = "admin.mangomolo.com/analytics/Recorder/".$user['id']."/".$record['RecordDate']."/".$record['Title']."mp4.jpg";
+        $item['thumbnail_path'] = "admin.mangomolo.com/analytics/Recorder/".$user['id']."/".$record['RecordDate']."/".$record['Title'].".mp4.jpg";
         if (empty($record['YoutubeLink']))
             $item['youtube_link'] = 0;
         else
@@ -346,7 +350,7 @@ function Get_topviewed_bydate_time() {
         $item['end_time'] = $record['StopTime'];
         $item['duration'] = $record['Duration'];
         $item['direct_path'] = $wowza['WowzaIP']."/".$record['RecordDate']."/".$record['Title'].".mp4";
-        $item['thumbnail_path'] = "admin.mangomolo.com/analytics/Recorder/".$user['id']."/".$record['RecordDate']."/".$record['Title']."mp4.jpg";
+        $item['thumbnail_path'] = "admin.mangomolo.com/analytics/Recorder/".$user['id']."/".$record['RecordDate']."/".$record['Title'].".mp4.jpg";
         if (empty($record['YoutubeLink']))
             $item['youtube_link'] = 0;
         else
@@ -365,6 +369,7 @@ function Get_topviewed_bydate_time() {
 function Get_topviewed_alltime() {
     global $db;
     global $user;
+    global $wowza;
 
     $date1 = $_GET['date1'];
     $date2 = $_GET['date2'];
@@ -389,7 +394,7 @@ function Get_topviewed_alltime() {
         $item['end_time'] = $record['StopTime'];
         $item['duration'] = $record['Duration'];
         $item['direct_path'] = $wowza['WowzaIP']."/".$record['RecordDate']."/".$record['Title'].".mp4";
-        $item['thumbnail_path'] = "admin.mangomolo.com/analytics/Recorder/".$user['id']."/".$record['RecordDate']."/".$record['Title']."mp4.jpg";
+        $item['thumbnail_path'] = "admin.mangomolo.com/analytics/Recorder/".$user['id']."/".$record['RecordDate']."/".$record['Title'].".mp4.jpg";
         if (empty($record['YoutubeLink']))
             $item['youtube_link'] = 0;
         else
@@ -406,7 +411,52 @@ function Get_topviewed_alltime() {
  * upload video to mangomolo
  */
 function post_video() {
-    echo "Not finished yet.";
+    global $action;
+    global $env;
+    global $uploadPath;
+
+    $allowedExts = array("mp4", "avi", "asf", "swf");
+    $temp = explode(".", $_FILES["uploadFile"]["name"]);
+    $extension = end($temp);
+
+    $title = $_POST['title'];
+    $desc = $_POST['description'];
+    $duration = $_POST['duration'];
+
+
+    $return['result'] = false;
+    $return['message'] = '';
+    $data;
+
+    if (in_array($extension, $allowedExts)) {
+        if ($_FILES["uploadFile"]["error"] > 0) {
+            $return['message'] = $_FILES["uploadFile"]["error"];
+        } else {
+            if (file_exists($uploadPath . date('Y-m-d') . "/" . $title . "." . $extension)) {
+                $return["message"] = $_FILES["uploadFile"]["name"] . " already exists. ";
+            } else {
+                move_uploaded_file($_FILES["uploadFile"]["tmp_name"], $uploadPath . date('Y-m-d') . "/" . $title . "." . $extension);
+                $return['result'] = true;
+                $return['message'] = "Successfully uploaded.";
+                $data['title'] = $title;
+                $data['record_date'] = date('Y-m-d');
+                $return['data'] = $data;
+            }
+        }
+    } else {
+        $return["message"] = "Invalid file type";
+    }
+    $action = "post_video";
+    
+    $resultString = '[{"result": ' . (($return['result']) ? "true" : "false") . ',"message": "' . $return['message'] . '"';
+
+    if (empty($data)) {
+        $resultString .= "}]";
+    } else {
+        $resultString .= ', "data": {"title": "' . $data['title'] . '", "description": "' . $desc. '","duration": ' . $duration. ', "record_date": "' . $data['record_date'] . '"}}]';
+    }
+    echo $resultString;
+
 }
 
 /**
@@ -461,6 +511,19 @@ if ($_GET) {
         $f();
     }
 }
+
+if($_POST) {
+    global $user;
+    global $wowza;
+    global $db;
+
+    // var_dump($_POST);
+
+    // $action = $_POST['action'];
+    // if (function_exists($action))
+    //     $action();
+    post_video();
+}
 ?>
 
 
@@ -469,7 +532,7 @@ if ($_GET) {
 
 
 <?php
-$action = $_GET['action'];
+// $action = $_GET['action'];
 if (empty($action)) {
 ?>
 
@@ -1220,6 +1283,19 @@ $.get(url, {
             </section>
 
         </div>
+
+
+        <div class="form-controller">
+            <form action="#" method="post" enctype="multipart/form-data">
+                <input type='text' name='title' id='title' />
+                <input type='text' name='description' id='description' />
+                <input type='text' name='duration' id='duration' />
+                <label for="file">Filename:</label>
+                <input type="file" name="uploadFile" id="file"><br>
+                <input type="submit" name="submit" value="Submit">
+            </form>
+        </div>
+            
 
     </div>
 </body>
